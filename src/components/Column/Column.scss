@@ -1,0 +1,65 @@
+@import './constraint';
+
+.column {
+    width: 300px;
+    min-width: 300px;
+    border-radius: 5px;
+    overflow: hidden;
+    max-height: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    > * {
+      background-color: $column-bg-color;
+      color: $column-color;
+      padding: 0 8px;
+    }
+
+    header {
+      padding: 10px 8px;
+      h2 {
+        padding: 0;
+        margin: 0;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+      }
+    }
+
+    ul.card-list {
+      list-style: none;
+      padding: 0;
+      margin: 0px;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      flex: 1 1 auto;
+      
+      &::-webkit-scrollbar {
+        -webkit-appearance: none;
+      }
+
+      &::-webkit-scrollbar:vertical  {
+        width: 11px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: darken($column-bg-color, 15);
+        border-right: 5px solid $column-bg-color;
+      }
+
+    }
+
+    footer {
+      padding: 4px 8px;
+      span {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 24px;
+        color: $column-footer-color;
+      }
+    }
+   
+
+} 

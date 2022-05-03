@@ -1,0 +1,11 @@
+
+@import './constraint';
+
+.navbar-app {
+    background-color: $navapp-bg-color;
+    font-size: 1.5rem;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 6px 4px;
+}
