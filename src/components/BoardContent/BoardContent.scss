@@ -1,0 +1,27 @@
+@import './constraint';
+
+.board-columns {
+    flex: 1;
+    display: flex;
+    overflow-x: auto;
+    padding: 0px 0px 16px 16px;
+    gap: 10px;
+    margin: 0 10px 10px 10px;
+
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      
+    }
+
+    &::-webkit-scrollbar:horizontal  {
+      height: 11px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $ul-scroll-thumb-bg-color;
+      border-radius: 8px;
+    }
+
+
+    
+  }
