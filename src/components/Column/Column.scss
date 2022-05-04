@@ -1,14 +1,20 @@
 @import './constraint';
 
+$column-header-height: 46px;
+$column-footer-height: 46px;
+$column-height: calc(#{$height-boardcontent} - 50px);
+
+
+
 .column {
     width: 300px;
     min-width: 300px;
     border-radius: 5px;
     overflow: hidden;
-    max-height: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
+    max-height: $column-height;
+    margin-right: 10px;
 
     > * {
       background-color: $column-bg-color;
@@ -16,8 +22,12 @@
       padding: 0 8px;
     }
 
-    header {
+    header.column-drag-handle {
       padding: 10px 8px;
+      cursor: pointer;
+      height: $column-header-height;
+      display: flex;
+      align-items: center;
       h2 {
         padding: 0;
         margin: 0;
@@ -34,7 +44,8 @@
       min-height: 0;
       overflow-y: auto;
       overflow-x: hidden;
-      flex: 1 1 auto;
+      max-height: calc(#{$column-height} - #{$column-header-height} - #{$column-footer-height});
+
       
       &::-webkit-scrollbar {
         -webkit-appearance: none;
@@ -49,10 +60,29 @@
         border-right: 5px solid $column-bg-color;
       }
 
+      .card-ghost {
+        transition: transform 0.18s ease;
+        transform: rotateZ(5deg)
+      }
+      
+      .card-ghost-drop{
+        transition: transform 0.18s ease-in-out;
+        transform: rotateZ(0deg)
+      }
+
+      .card-drop-preview {
+        background-color: rgba(150, 150, 200, 0.1);
+        border: 1px dashed #abc;
+        margin: 5px;
+      }
+
     }
 
     footer {
       padding: 4px 8px;
+      height: $column-footer-height;
+      display: flex;
+      align-items: center;
       span {
         font-size: 20px;
         font-weight: 600;
