@@ -1,16 +1,14 @@
 @import './constraint';
 
 .board-columns {
-    flex: 1;
+    height: $height-boardcontent;
     display: flex;
     overflow-x: auto;
-    padding: 0px 0px 16px 16px;
-    gap: 10px;
-    margin: 0 10px 10px 10px;
+    margin: 0 10px 10px;
+    overflow-y: hidden;
 
     &::-webkit-scrollbar {
       -webkit-appearance: none;
-      
     }
 
     &::-webkit-scrollbar:horizontal  {
@@ -22,6 +20,10 @@
       border-radius: 8px;
     }
 
-
+    .columns-drop-preview {
+      background-color: rgba(150, 150, 200, 0.1);
+      border: 1px dashed #abc;
+      margin: 5px 45px 5px 5px;
+    }
     
   }

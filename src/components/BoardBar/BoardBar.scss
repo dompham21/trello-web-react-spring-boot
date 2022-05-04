@@ -1,7 +1,10 @@
+@import './constraint';
+
 .navbar-board {
-    height: 50px;
+    height: $height-boardbar;
     font-size: 1.1rem;
     display: flex;
     align-items: center;
     padding: 6px 4px;
+    min-height: $height-boardbar;
 }
