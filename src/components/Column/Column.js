@@ -1,10 +1,14 @@
 import Card from 'components/Card/Card'
 import React from 'react'
 import { Container, Draggable } from "react-smooth-dnd"
+import { IoMdAdd } from 'react-icons/io'
 import './Column.scss'
 
 function Column(props) {
-  const { column } = props
+  const { column, onCardDrop } = props
+
+
+ 
   return (
     <div className="column">
       <header className="column-drag-handle">
@@ -13,7 +17,7 @@ function Column(props) {
       <ul className="card-list">
         <Container
           groupName="card-group-col"
-          getChildPayload={index => column[index]}
+          getChildPayload={index => column.cards[index]}
           dragClass="card-ghost"
           dropClass="card-ghost-drop"
           dropPlaceholder={{                      
@@ -21,6 +25,7 @@ function Column(props) {
             showOnTop: true,
             className: "card-drop-preview" 
           }}
+          onDrop={dropResult => onCardDrop(column.id, dropResult)}
           dropPlaceholderAnimationDuration={200}
         >
           {
@@ -33,7 +38,10 @@ function Column(props) {
         </Container> 
       </ul>
       <footer>
-        <span>Add a card</span>
+        <div className="footer-wrapper">
+          <IoMdAdd/>
+          <span>Add a card</span>
+        </div>
       </footer>
     </div>
   )
