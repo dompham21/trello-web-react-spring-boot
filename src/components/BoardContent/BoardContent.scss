@@ -1,29 +1,61 @@
 @import './constraint';
 
+$height-new-column: 36px;
+
 .board-columns {
-    height: $height-boardcontent;
-    display: flex;
-    overflow-x: auto;
-    margin: 0 10px 10px;
-    overflow-y: hidden;
+  height: $height-boardcontent;
+  display: flex;
+  overflow-x: auto;
+  margin: 0 10px 10px;
+  overflow-y: hidden;
+  padding: 0 10px;
 
-    &::-webkit-scrollbar {
-      -webkit-appearance: none;
-    }
-
-    &::-webkit-scrollbar:horizontal  {
-      height: 11px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: $ul-scroll-thumb-bg-color;
-      border-radius: 8px;
-    }
-
-    .columns-drop-preview {
-      background-color: rgba(150, 150, 200, 0.1);
-      border: 1px dashed #abc;
-      margin: 5px 45px 5px 5px;
-    }
-    
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
   }
+
+  &::-webkit-scrollbar:horizontal  {
+    height: 11px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $ul-scroll-thumb-bg-color;
+    border-radius: 8px;
+  }
+
+  .columns-drop-preview {
+    background-color: rgba(150, 150, 200, 0.1);
+    border: 1px dashed #abc;
+    margin: 5px 45px 5px 5px;
+  }
+  
+  .add-new-column {
+    width: 300px;
+    min-width: 300px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    height: $height-new-column;
+    padding: 5px 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background-color: $new-col-bg-tran;
+    font-weight: 600;
+
+    &:hover {
+      background-color: $new-col-bg-tran-hover;
+    }
+    svg {
+      font-size: 18px;
+      margin: 0 5px;
+    }
+
+    span {
+      flex: 1;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 @import './constraint';
 
-$column-header-height: 46px;
-$column-footer-height: 46px;
+$column-header-height: 36px;
+$column-footer-height: 36px;
 $column-height: calc(#{$height-boardcontent} - 50px);
 
 
@@ -23,17 +23,17 @@ $column-height: calc(#{$height-boardcontent} - 50px);
     }
 
     header.column-drag-handle {
-      padding: 10px 8px;
+      padding: 5px 8px;
       cursor: pointer;
       height: $column-header-height;
       display: flex;
       align-items: center;
+      color: $header-text-color;
       h2 {
         padding: 0;
         margin: 0;
         font-weight: 600;
-        font-size: 20px;
-        line-height: 24px;
+        font-size: 16px;
       }
     }
 
@@ -79,16 +79,38 @@ $column-height: calc(#{$height-boardcontent} - 50px);
     }
 
     footer {
-      padding: 4px 8px;
-      height: $column-footer-height;
-      display: flex;
-      align-items: center;
-      span {
-        font-size: 20px;
-        font-weight: 600;
-        line-height: 24px;
-        color: $column-footer-color;
+      height: $column-footer-height; 
+      color: $footer-text-color;
+      padding-bottom: 8px;
+
+      .footer-wrapper {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 6px 8px;
+        border-radius: 5px;
+
+        &:hover {
+          background-color: $footer-bg-hover;
+        }
+
+        svg {
+          font-size: 18px;
+          margin: 0 5px;
+        }
+  
+        span {
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 24px;
+          flex: 1;
+        }
+
       }
+      
+     
+      
+     
     }
    
 
