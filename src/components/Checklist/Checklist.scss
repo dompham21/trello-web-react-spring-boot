@@ -1,0 +1,64 @@
+.checklist {
+    margin-left: 0;
+
+    .checklist-process {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      .process-percent {
+        color: #5e6c84; 
+        font-size: 11px;
+      }
+    }
+    .checklist-list {
+      display: flex;
+      flex-direction: column;
+      .checklist-item {
+        display: flex;
+        gap: 8px;
+        cursor: pointer;
+        padding: 6px 0;
+        &:hover {
+          background-color: #091e420a;
+          border-radius: 3px;
+
+        }
+        &-text {
+          display: none;
+          &.hide-on-edit {
+            flex: 1;
+            display: flex;
+            align-items: center;
+          }
+        }
+       
+      }
+    }
+
+    .checklist-item-label {
+      display: none;
+      flex: 1;
+      &.editing {
+        display: block;
+      }
+
+    }
+
+    .checklist-new-item {
+      margin-left: 32px;
+      margin-top: 10px;
+      .btn-new {
+        margin: 8px 0;
+        background-color: #091e420a;
+        color: #172b4d;
+        border-radius: 3px;
+      }
+
+      .btn-hide-on-edit {
+        display: none;
+      }
+      
+    }
+    
+  }

@@ -1,0 +1,50 @@
+.modal-cover-bg {
+    display: flex;
+    flex-direction: column;
+    .modal-cover-bg-wrapper {
+        .modal-cover-bg-label {
+            h4 {
+                color: #5e6c84;
+                font-size: 12px;
+                font-weight: 600;
+                margin-top: 12px;
+                margin-bottom: 4px;
+            }
+        }
+        .modal-cover-bg-color {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+    
+            .modal-cover-btn-select {
+                height: 32px;
+                width: 50px;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                border-radius: 3px;
+                cursor: pointer;
+                border: 0;
+                box-shadow: none;
+                
+                &.is-active {
+                    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #0079bf;
+                }
+                
+            } 
+            &.is-photo {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                .modal-cover-btn-select {
+                    height: 48px;
+                    width: 88px;
+                }
+                
+            }
+        }
+
+        
+    }
+    
+}
