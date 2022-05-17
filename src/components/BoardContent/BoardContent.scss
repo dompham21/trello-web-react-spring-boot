@@ -1,6 +1,6 @@
 @import './constraint';
 
-$height-new-column: 36px;
+$height-new-column: 30px;
 
 .board-columns {
   height: $height-boardcontent;
@@ -35,27 +35,104 @@ $height-new-column: 36px;
     border-radius: 5px;
     overflow: hidden;
     margin-right: 10px;
-    display: flex;
-    align-items: center;
-    height: $height-new-column;
-    padding: 5px 8px;
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
     color: white;
     background-color: $new-col-bg-tran;
-    font-weight: 600;
+    padding: 5px 0px;
+    height: $height-new-column;
+    display: flex;
+    align-items: center;
+    transition: all 40ms ease-in;
 
     &:hover {
       background-color: $new-col-bg-tran-hover;
     }
-    svg {
-      font-size: 18px;
-      margin: 0 5px;
+
+    &.is-active {
+      background-color: $column-bg-color;
+      cursor: default;
+      height: max-content;
+
+
+      .add-new-col-placeholder {
+        display: none;
+      }
+      
+      .add-new-col-form {
+        display: block;
+      }
+
+      .add-new-col-control {
+        display: flex;
+        align-items: center;
+      }
+
+    }
+    
+
+    form {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 0 5px;
+      height: 100%;
     }
 
-    span {
+    .add-new-col-placeholder {
+      display: flex;
+      align-items: center;
+      height: 100%;
       flex: 1;
+
+    
+      svg {
+        font-size: 18px;
+        margin-left: 10px;
+        margin-right: 5px;
+      }
+  
+      span {
+        flex: 1;
+      }
     }
+    
+
+    .add-new-col-form {
+      display: none;
+    }
+    
+    .add-new-col-control {
+      display: none;
+      gap: 8px;
+      margin-top: 5px;
+
+      .btn-add {
+        padding: 4px 12px;
+        height: 32px;
+        border: none;
+        outline: none;
+        background-color: #0079bf;
+        box-shadow: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 14px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span {
+          color: white;
+        }
+      }
+
+      svg {
+        font-size: 24px;
+        color: #42526e;
+        cursor: pointer;
+      }
+    }
+   
   }
 }

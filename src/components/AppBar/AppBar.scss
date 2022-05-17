@@ -2,11 +2,13 @@
 @import './constraint';
 
 .navbar-app {
-    background-color: $navapp-bg-color;
+    backdrop-filter: blur(6px);
     font-size: 1.5rem;
     height: $height-appbar;
     display: flex;
     align-items: center;
     padding: 6px 4px;
     min-height: $height-appbar;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-sizing: border-box;
 }

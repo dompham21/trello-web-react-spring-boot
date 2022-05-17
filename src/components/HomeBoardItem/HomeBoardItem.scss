@@ -1,0 +1,71 @@
+@import './constraint';
+
+.board-item {
+    cursor: pointer;
+    position: relative;
+
+    a {
+        text-decoration: none;
+    }
+
+    &-bg {
+        border-radius: 5px;
+        background-position: 50%;
+        background-size: cover;
+        background-color: #0c1e3b21;
+        padding: 8px;
+        position: relative;
+
+    }
+
+    .board-fade {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    .board-title-details {
+        height: 80px;
+        position: relative;
+
+        &-name {
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+        }
+    }
+
+    &.add-new {
+        .board-title-details { 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &-name {
+                color: $text-color;
+                font-weight: 600;
+                font-size: 18px;
+            }
+        }
+
+        &:active {
+            .board-item-bg {
+                background-color: #e4f0f6;
+            }
+            .board-title-details-name {
+                color: #0079bf;
+            }
+        }
+       
+    }
+}

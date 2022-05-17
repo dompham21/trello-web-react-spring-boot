@@ -1,0 +1,10 @@
+@import './constraint';
+
+
+.home-content {
+    height: calc(100vh - #{$height-appbar});
+    background-color: $home-content-bg;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}

@@ -1,0 +1,44 @@
+.modal-date {
+    overflow: hidden;
+    padding: 0 12px;
+    padding-bottom: 35px;
+    .modal-date-header {
+        display: grid;
+        grid-template-columns: 12px 1fr 12px;
+        padding: 0 12px;
+        margin-bottom: 8px;
+        height: 40px;
+        align-items: center;
+        .modal-date-title {
+            border-bottom: 1px solid #091e4221;
+            color: #5e6c84;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+    
+        svg {
+            font-size: 16px;
+            cursor: pointer;
+        }
+    }    
+    
+    
+    .modal-date-calendar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-date-btn-submit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 24px;
+        button {
+            width: 100%;
+        }
+    }
+}

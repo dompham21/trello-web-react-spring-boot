@@ -19,10 +19,11 @@ $new-col-bg-tran: hsla(0, 0%, 100%, .24);
 $new-col-bg-tran-hover: hsla(0, 0%, 100%, .34);
 $footer-bg-hover: #091e4214;
 $card-bg-hover: #f4f5f7;
+$home-content-bg: #fafbfc;
+$text-color: #172b4d;
 
 
 
-
-$height-appbar: 5vh;
-$height-boardbar: 6vh;
-$height-boardcontent: 88vh;
+$height-appbar: 44px;
+$height-boardbar: 52px;
+$height-boardcontent: calc(100vh - #{$height-appbar} - #{$height-boardbar});

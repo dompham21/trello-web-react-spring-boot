@@ -1,25 +1,54 @@
 import Column from 'components/Column/Column';
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import './BoardContent.scss';
-import { initData } from 'mock/InitData';
 import {isEmpty} from 'lodash';
 import { Container, Draggable } from 'react-smooth-dnd';
 import { applyDrag } from 'utilities/dragDrog'
 import { IoMdAdd } from 'react-icons/io'
+import { MdClear } from 'react-icons/md'
+import { useDispatch, useSelector } from 'react-redux';
+import Form, {
+  ErrorMessage,
+  Field,
+  HelperMessage,
+  ValidMessage,
+} from '@atlaskit/form';
+import LoadingButton from '@atlaskit/button/loading-button';
+import TextField from '@atlaskit/textfield';
+import {  getAllColumn, postNewColumn } from 'store/reducer/columnReducer';
+import {useParams} from "react-router-dom";
 
-function BoardContent() {
-  const [board, setBoard] = useState({});
+function BoardContent(props) {
+  const { board } = props;
   const [columns, setColumns] = useState([]);
+  const [isAdd, setIsAdd] = useState(false);
+  const dispatch = useDispatch();
+  const {id} = useParams();
+  const isLoading = useSelector(state => state.column.isLoading)
+  const columnsState = useSelector(state => state.column.columns)
+  const newColumn = useSelector(state => state.column.column)
 
   useEffect(() => {
-    const boardFromDB = initData.boards.find(b => b.id === 'board-1');
-    if(boardFromDB) {
-      setBoard(boardFromDB);
-      setColumns(boardFromDB.columns)
-    }
-
+    dispatch(getAllColumn(id))
   },[])
-  if(isEmpty(board)) {
+
+ 
+
+  useEffect(() => {
+    setColumns(columnsState);
+  },[columnsState])
+
+  useEffect(() => {
+    if(newColumn !== null) {
+      let columnPush = [...columns];
+      columnPush.push(newColumn)
+      setColumns(columnPush)
+    }
+  },[newColumn])
+
+
+  
+  if(isEmpty(board) || board === null) {
     return <div className="not-found">Board not found</div>
   }
 
@@ -29,8 +58,7 @@ function BoardContent() {
     let newBoard = {...board}
     newBoard.columns = newColumns;
 
-    setBoard(newBoard);
-    setColumns(newColumns);
+    // setColumns(newColumns);
   }
 
 
@@ -42,11 +70,17 @@ function BoardContent() {
       console.log(dropResult)
 
       currentColumn.cards = applyDrag(currentColumn.cards, dropResult);
-      setColumns(newColumns)
+      // setColumns(newColumns)
     }
   }
 
+  const handleClickAdd = () => {
+    setIsAdd(true);
+  }
 
+  const handleCancelAdd = () => {
+    setIsAdd(false);
+  }
   return (
     <div className="board-columns">
       <Container
@@ -69,9 +103,72 @@ function BoardContent() {
           ))  
         }
       </Container>
-      <div className="add-new-column">
-      <IoMdAdd/>
-        <span>Add another list</span>
+      <div className={`add-new-column ${isAdd ? 'is-active' : ''}`}>
+        <div className="add-new-col-placeholder" onClick={handleClickAdd}>
+          <IoMdAdd/>
+          <span>Add another list</span>
+        </div>
+        <Form
+          onSubmit={(data, form) => {
+            dispatch(postNewColumn(data));
+            form.reset();
+          }}
+         
+        >
+          {({ formProps, submitting, reset }) => (
+            <form {...formProps} className="add-new-col-form">
+              <Field
+                name="boardId"
+                defaultValue={board?.id}
+                isRequired
+              >
+                
+                {({ fieldProps }) => ( 
+                  <input autoComplete="off" type="hidden"/>
+                )}
+              </Field>
+              <Field
+                name="title"
+                label="Column title"
+                defaultValue=""
+                isRequired
+                validate={async (value) => {
+                    if (value !== undefined || value !== "") {
+                        return undefined;
+                    }
+
+                    return new Promise((resolve) => setTimeout(resolve, 300)).then(
+                        () => 'error',
+                    );
+                }}
+              >
+                {({ fieldProps, error, valid, meta }) => {
+                return (
+                    <Fragment>
+                        <TextField autoComplete='off' placeholder='Enter colum tilte...' type="text" {...fieldProps} />
+                        {error && (
+                            <ErrorMessage>
+                            Column title is required
+                            </ErrorMessage>
+                        )}
+                        {meta.validating && meta.dirty ? (
+                            <HelperMessage>Checking......</HelperMessage>
+                        ) : null}
+                        {!meta.validating && valid && meta.dirty ? (
+                            <ValidMessage>Awesome column title!</ValidMessage>
+                        ) : null}
+                    </Fragment>
+                );
+                }}
+              </Field>
+              <div className="add-new-col-control">
+                <LoadingButton isLoading={isLoading} className="btn-add" type="submit">Add list</LoadingButton>
+                <MdClear onClick={handleCancelAdd}/>
+              </div>
+                
+            </form>
+          )}
+        </Form>
       </div>
     </div>
   )

@@ -2,6 +2,8 @@
 
 $column-header-height: 36px;
 $column-footer-height: 36px;
+$column-footer-max-height: 135px;
+
 $column-height: calc(#{$height-boardcontent} - 50px);
 
 
@@ -46,6 +48,13 @@ $column-height: calc(#{$height-boardcontent} - 50px);
       overflow-x: hidden;
       max-height: calc(#{$column-height} - #{$column-header-height} - #{$column-footer-height});
 
+      &.colappse {
+        max-height: calc(#{$column-height} - #{$column-header-height} - #{$column-footer-max-height});
+      }
+      .smooth-dnd-container {
+        min-height: 0;
+      }
+
       
       &::-webkit-scrollbar {
         -webkit-appearance: none;
@@ -79,9 +88,24 @@ $column-height: calc(#{$height-boardcontent} - 50px);
     }
 
     footer {
-      height: $column-footer-height; 
+      min-height: $column-footer-height; 
       color: $footer-text-color;
       padding-bottom: 8px;
+
+      &.is-active {
+        .footer-wrapper {
+            display: none;
+        }
+        .add-new-card-form {
+          display: block;
+        }
+
+        .add-new-card-control {
+          display: flex;
+          align-items: center;
+        }
+      }
+
 
       .footer-wrapper {
         display: flex;
@@ -107,9 +131,41 @@ $column-height: calc(#{$height-boardcontent} - 50px);
         }
 
       }
+
+      .add-new-card-form {
+        display: none;
+      }
       
-     
-      
+      .add-new-card-control {
+        display: none;
+        gap: 8px;
+        margin-top: 5px;
+  
+        .btn-add {
+          padding: 4px 12px;
+          height: 32px;
+          border: none;
+          outline: none;
+          background-color: #0079bf;
+          box-shadow: none;
+          cursor: pointer;
+          border-radius: 5px;
+          font-size: 14px;
+          line-height: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          span {
+            color: white;
+          }
+        }
+  
+        svg {
+          font-size: 24px;
+          color: #42526e;
+          cursor: pointer;
+        }
+      }
      
     }
    

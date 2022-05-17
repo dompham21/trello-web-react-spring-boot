@@ -1,0 +1,36 @@
+.description-fake-text-area {
+    background-color: #091e420a;
+    border: none;
+    border-radius: 3px;
+    box-shadow: none;
+    display: block;
+    min-height: 40px;
+    padding: 8px 12px;
+    text-decoration: none;
+    cursor: pointer;
+
+    &.hide-on-edit {
+        display: none;
+    }
+}
+
+.description-text-area {
+    display: none;
+    &.is-editing {
+        display: block;
+    }
+}
+
+.description-markdown {
+    margin: 0 0 8px;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 3px;
+
+    &:hover {
+        background-color: #091e420a;
+    }
+    &.hide-on-edit {
+        display: none;
+    }
+}
