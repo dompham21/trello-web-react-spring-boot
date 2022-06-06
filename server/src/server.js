@@ -1,14 +1,16 @@
 import express from 'express';
+import { env } from './config/environment.js';
+import { connectDB } from './config/mongodb.js';
 
 const app = express();
 
-const hostname = 'localhost';
-const port = 8080;
+connectDB();
 
 app.get('/', (req, res) => {
     res.end('<h1>hello world</h1>');
 })
 
-app.listen(port, hostname, () => {
-    console.log(`Server is running at ${hostname}:${port}`)
+// @ts-ignore
+app.listen(env.PORT, env.HOSTNAME, () => {
+    console.log(`Server is running at ${env.HOSTNAME}:${env.PORT}`)
 })
