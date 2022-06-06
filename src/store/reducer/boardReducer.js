@@ -40,10 +40,19 @@ export const boardSlice = createSlice({
         getBoardByIdFailure: (state, action) => {
             state.isLoading = false;
         },
-
+        updateOrderNumColumn: (state, action) => {
+            state.isLoading = true;
+        },
+        updateOrderNumColumnDone: (state, action) => {
+            state.isLoading = false;
+            state.board = action.payload;
+        },
+        updateOrderNumColumnFailure: (state, action) => {
+            state.isLoading = false;
+        }
     }
     
 })
 export const { postNewBoard, postNewBoardDone, postNewBoardFailure, getAllBoard, getAllBoardDone, getAllBoardFailure,
-    getBoardById, getBoardByIdDone, getBoardByIdFailure} = boardSlice.actions
+    getBoardById, getBoardByIdDone, getBoardByIdFailure, updateOrderNumColumn, updateOrderNumColumnDone, updateOrderNumColumnFailure} = boardSlice.actions
 export default boardSlice.reducer;

@@ -13,7 +13,8 @@ import Form, {
 } from '@atlaskit/form';
 import LoadingButton from '@atlaskit/button/loading-button';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllCard, postNewCard } from 'store/reducer/cardReducer'
+import { postNewCard } from 'store/reducer/cardReducer'
+import _ from "lodash"
 
 function Column(props) {
   const [isAdd, setIsAdd] = useState(false)
@@ -25,11 +26,20 @@ function Column(props) {
 
   const dispatch = useDispatch();
 
-  
+  useEffect(() => {
+    if(column?.cards) {
+      let arr = [...column.cards]
+
+      setCards(_.orderBy(arr, ['orderNum'],['asc']))
+    }
+  },[])
 
   useEffect(() => {
-    setCards(column?.cards)
-  },[])
+    if(cardsState !== null && cardsState?.cards  && cardsState?.id === column.id) {
+      let arr = [...cardsState.cards]
+      setCards(_.orderBy(arr, ['orderNum'],['asc']));
+    }
+  },[cardsState])
 
   useEffect(() => {
     if(newCard !== null && newCard.columns === column.id) {
@@ -53,7 +63,6 @@ function Column(props) {
   const handleCancelAdd = () => {
     setIsAdd(false);
   }
- 
   return (
     <div className="column">
       <header className="column-drag-handle">
@@ -74,7 +83,7 @@ function Column(props) {
           dropPlaceholderAnimationDuration={200}
         >
           {
-            cards?.map((card, index) => (
+            cards.map((card, index) => (
               <Draggable key={index}>
                 <Card card={card}/>
               </Draggable>

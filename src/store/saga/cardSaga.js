@@ -1,8 +1,8 @@
 import { all, put, takeLatest, call } from 'redux-saga/effects';
-import { getAllCardApi, postNewCardApi, updateCardColumnIdApi, updateCardCoverApi, updateCardDescriptionApi, updateCardDueDateApi, updateCardTitleApi } from 'store/api/cardApi';
+import { postNewCardApi, updateCardColumnIdApi, updateCardCoverApi, updateCardDescriptionApi, updateCardDueDateApi, updateCardTitleApi, updateOrderNumCardApi } from 'store/api/cardApi';
 import { postNewTaskApi, updateTaskNameApi, updateTaskStateApi } from 'store/api/taskApi';
 import { postNewTaskListApi } from 'store/api/taskListApi';
-import { getAllCard, getAllCardDone, getAllCardFailure, postNewCard, postNewCardDone, postNewCardFailure, postNewTask, postNewTaskDone, postNewTaskFailure, postNewTasklist, postNewTasklistDone, postNewTasklistFailure, updateCardColumnId, updateCardColumnIdDone, updateCardColumnIdFailure, updateCardCover, updateCardCoverDone, updateCardCoverFailure, updateCardDescription, updateCardDescriptionDone, updateCardDescriptionFailure, updateCardDueDate, updateCardDueDateDone, updateCardDueDateFailure, updateCardTitle, updateCardTitleDone, updateCardTitleFailure, updateTaskName, updateTaskNameDone, updateTaskNameFailure, updateTaskState, updateTaskStateDone, updateTaskStateFailure } from 'store/reducer/cardReducer';
+import { postNewCard, postNewCardDone, postNewCardFailure, postNewTask, postNewTaskDone, postNewTaskFailure, postNewTasklist, postNewTasklistDone, postNewTasklistFailure, updateCardColumnId, updateCardColumnIdDone, updateCardColumnIdFailure, updateCardCover, updateCardCoverDone, updateCardCoverFailure, updateCardDescription, updateCardDescriptionDone, updateCardDescriptionFailure, updateCardDueDate, updateCardDueDateDone, updateCardDueDateFailure, updateCardTitle, updateCardTitleDone, updateCardTitleFailure, updateOrderNumCard, updateOrderNumCardDone, updateOrderNumCardFailure, updateTaskName, updateTaskNameDone, updateTaskNameFailure, updateTaskState, updateTaskStateDone, updateTaskStateFailure } from 'store/reducer/cardReducer';
 
 
 function* postNewCardSaga(action) {
@@ -19,23 +19,6 @@ function* postNewCardSaga(action) {
 		
 	} catch (error) {
 		yield put(postNewCardFailure());
-	}
-}
-
-function* getAllCardSaga(action) {
-	let id = action.payload;
-    try {
-		const resp = yield call(getAllCardApi, id);
-		const { status, data } = resp;
-		if( status === 200) {
-			yield put(getAllCardDone(data));
-		}
-		else {
-			yield put(getAllCardFailure());
-		}
-		
-	} catch (error) {
-		yield put(getAllCardFailure());
 	}
 }
 
@@ -207,13 +190,25 @@ function* updateTaskStateSaga(action) {
 	}
 }
 
-function* watchPostNewCard() {
-	yield takeLatest(postNewCard, postNewCardSaga);
+function* updateOrderNumCardSaga(action) {
+	let dataToSubmit = action.payload;
+    try {
+		const resp = yield call(updateOrderNumCardApi, dataToSubmit);
+		const { status, data } = resp;
+		if( status === 200) {
+			yield put(updateOrderNumCardDone(data));
+		}
+		else {
+			yield put(updateOrderNumCardFailure());
+		}
+		
+	} catch (error) {
+		yield put(updateOrderNumCardFailure());
+	}
 }
 
-
-function* watchGetAllCard() {
-	yield takeLatest(getAllCard, getAllCardSaga);
+function* watchPostNewCard() {
+	yield takeLatest(postNewCard, postNewCardSaga);
 }
 
 function* watchUpdateCardTitle() {
@@ -247,10 +242,14 @@ function* watchUpdateTaskName() {
 function* watchUpdateTaskState() {
 	yield takeLatest(updateTaskState, updateTaskStateSaga);
 }
+
+function* watchUpdateOrderNumCard() {
+	yield takeLatest(updateOrderNumCard, updateOrderNumCardSaga);
+}
+
 export default function* rootSaga() { 
     yield all([
 		watchPostNewCard(),
-		watchGetAllCard(),
 		watchUpdateCardTitle(),
 		watchUpdateCardDescription(),
 		watchUpdateCardCover(),
@@ -259,7 +258,8 @@ export default function* rootSaga() {
 		watchPostNewTasklist(),
 		watchPostNewTask(),
 		watchUpdateTaskName(),
-		watchUpdateTaskState()
+		watchUpdateTaskState(),
+		watchUpdateOrderNumCard()
 	]);
 }
 

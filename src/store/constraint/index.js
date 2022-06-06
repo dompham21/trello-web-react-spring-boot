@@ -15,7 +15,8 @@ export const POST_NEW_TASK_LIST = "api/taskList/add";
 export const POST_NEW_TASK = "api/task/add";
 export const UPDATE_TASK_NAME = "api/task/update/name";
 export const UPDATE_TASK_STATE = "api/task/update/state";
-
+export const UPDATE_ORDER_NUM_COLUMN = "api/board/columnDrop";
+export const UPDATE_ORDER_NUM_CARD = "api/card/cardDrop";
 
 
 

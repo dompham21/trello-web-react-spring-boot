@@ -8,3 +8,4 @@ export const postNewColumnApi = (data) => {
 export const getAllColumnApi = (id) => {
     return axiosService.get(`${SERVER_URL}/${GET_ALL_COLUMN}/${id}`);
 };
+

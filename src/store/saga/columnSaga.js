@@ -1,6 +1,6 @@
 import { all, put, takeLatest, call } from 'redux-saga/effects';
-import { getAllColumnApi, postNewColumnApi } from 'store/api/columnApi';
-import {  getAllColumn, getAllColumnDone, getAllColumnFailure, postNewColumn, postNewColumnDone, postNewColumnFailure } from 'store/reducer/columnReducer';
+import { getAllColumnApi, postNewColumnApi, updateOrderNumCardApi } from 'store/api/columnApi';
+import {  getAllColumn, getAllColumnDone, getAllColumnFailure, postNewColumn, postNewColumnDone, postNewColumnFailure, updateOrderNumCard, updateOrderNumCardDone, updateOrderNumCardFailure } from 'store/reducer/columnReducer';
 
 
 function* postNewColumnSaga(action) {
@@ -38,6 +38,8 @@ function* getAllColumnSaga(action) {
 }
 
 
+
+
 function* watchPostNewColumn() {
 	yield takeLatest(postNewColumn, postNewColumnSaga);
 }
@@ -46,11 +48,10 @@ function* watchGetAllColumn() {
 	yield takeLatest(getAllColumn, getAllColumnSaga);
 }
 
-
 export default function* rootSaga() { 
     yield all([
 		watchPostNewColumn(),
-		watchGetAllColumn()
+		watchGetAllColumn(),
 	]);
 }
 
