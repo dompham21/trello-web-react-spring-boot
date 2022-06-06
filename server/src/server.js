@@ -1,16 +1,32 @@
 import express from 'express';
 import { env } from './config/environment.js';
 import { connectDB } from './config/mongodb.js';
+import { BoardModel } from './models/board.model.js';
 
-const app = express();
 
-connectDB();
+connectDB()
+.then(() => console.log("Database connected successfully!"))
+.then(() => boostServer())
+.catch(error => {
+    console.log(error)
+    process.exit(1)
+});
 
-app.get('/', (req, res) => {
-    res.end('<h1>hello world</h1>');
-})
+const boostServer = () => {
+    const app = express();
 
-// @ts-ignore
-app.listen(env.PORT, env.HOSTNAME, () => {
-    console.log(`Server is running at ${env.HOSTNAME}:${env.PORT}`)
-})
+    app.get('/test', async (req, res) => {
+        let mock = { 
+            title: "First board",
+
+        }
+
+        await BoardModel.createNew(mock);
+
+    })
+    
+    // @ts-ignore
+    app.listen(env.PORT, env.HOSTNAME, () => {
+        console.log(`Server is running at ${env.HOSTNAME}:${env.PORT}`)
+    })
+}

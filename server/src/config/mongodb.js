@@ -1,6 +1,7 @@
 import { MongoClient } from 'mongodb'
 import { env } from './environment.js';
 
+let dbInstance = null;
 const uri = env.MONGODB_URI
 
 
@@ -12,20 +13,14 @@ export const connectDB = async () => {
         useUnifiedTopology: true,
     })
 
-    try {
-        await client.connect();
+    await client.connect();
 
-        await listDatabases(client);
-        console.log("Database connected successfully!")
-    } catch (error) {
-        console.log(error)
-    }
-    finally {
-        await client.close();
-    }
+    dbInstance = client.db(env.DB_NAME)
+
+    
 }
 
-const listDatabases = async (client) => {
-    const databases = await client.db().admin().listDatabases();
-    console.log(databases);
+export const getDB = () => {
+    if(!dbInstance) throw new Error("Must connect to Database firtst!");
+    return dbInstance;
 }
