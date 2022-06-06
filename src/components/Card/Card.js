@@ -28,11 +28,15 @@ function Task(props) {
   const closeModal = useCallback(() => setIsOpen(false), []);
 
   const getTotalChecklist = () => {
-    let total = card?.taskLists.length;
-    let totalDone = 0;
-    card?.tasklists?.map(task =>  { if(task.state) totalDone++ });
-
-    return totalDone + "/" + total;
+    if(card?.taskLists) {
+      let total = card?.taskLists.length;
+      let totalDone = 0;
+      card?.tasklists?.map(task =>  { if(task.state) totalDone++ });
+  
+      return totalDone + "/" + total;
+    }
+    else return "0/0"
+   
 }
   return (
     <Fragment>
@@ -89,7 +93,7 @@ function Task(props) {
                 </div>
                 <DescriptionCard id={card?.id} description={card?.description}/>
                 {
-                  card?.taskLists.map((tasklist) => 
+                  card?.taskLists?.map((tasklist) => 
                     <Checklist tasklist={tasklist} key={tasklist.id} id={card?.id}/>
                   )
                 }

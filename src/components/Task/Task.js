@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 
 function Task(props) {
     const { id, name, cardId, state } = props
+    console.log(props)
     const [editCheckBox, setEditCheckBox] = useState(false);
     const dispatch  = useDispatch();
     const handleCheckBox = (e) => {

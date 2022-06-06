@@ -30,6 +30,7 @@ export const columnSlice = createSlice({
         getAllColumnFailure: (state, action) => {
             state.isLoading = false;
         },
+        
 
     }
     

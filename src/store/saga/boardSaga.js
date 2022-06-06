@@ -1,7 +1,7 @@
 import { push } from 'connected-react-router';
 import { all, put, takeLatest, call } from 'redux-saga/effects';
-import { getAllBoardApi, getBoardByIdApi, postNewBoardApi } from 'store/api/boardApi';
-import { getAllBoard, getAllBoardDone, getAllBoardFailure, getBoardById, getBoardByIdDone, getBoardByIdFailure, postNewBoard, postNewBoardDone, postNewBoardFailure } from 'store/reducer/boardReducer';
+import { getAllBoardApi, getBoardByIdApi, postNewBoardApi, updateOrderNumColumnApi } from 'store/api/boardApi';
+import { getAllBoard, getAllBoardDone, getAllBoardFailure, getBoardById, getBoardByIdDone, getBoardByIdFailure, postNewBoard, postNewBoardDone, postNewBoardFailure, updateOrderNumColumn, updateOrderNumColumnDone, updateOrderNumColumnFailure } from 'store/reducer/boardReducer';
 
 
 function* postNewBoardSaga(action) {
@@ -57,6 +57,23 @@ function* getBoardByIdSaga(action) {
 	}
 }
 
+function* updateOrderNumColumnSaga(action) {
+	const dataToSubmit = action.payload
+
+	try {
+		const resp = yield call(updateOrderNumColumnApi, dataToSubmit);
+		const { status, data } = resp;
+		if( status === 200) {
+			yield put(updateOrderNumColumnDone(data));
+		}
+		else {
+			yield put(updateOrderNumColumnFailure());
+		}
+		
+	} catch (error) {
+		yield put(updateOrderNumColumnFailure());
+	}
+}
 
 function* watchPostNewBoard() {
 	yield takeLatest(postNewBoard, postNewBoardSaga);
@@ -70,11 +87,16 @@ function* watchGetBoardById() {
 	yield takeLatest(getBoardById, getBoardByIdSaga);
 }
 
+function* watchUpdateOrderNumColumn() {
+	yield takeLatest(updateOrderNumColumn, updateOrderNumColumnSaga);
+}
+
 export default function* rootSaga() { 
     yield all([
 		watchPostNewBoard(),
 		watchGetAllBoard(),
-		watchGetBoardById()
+		watchGetBoardById(),
+		watchUpdateOrderNumColumn()
 	]);
 }
 

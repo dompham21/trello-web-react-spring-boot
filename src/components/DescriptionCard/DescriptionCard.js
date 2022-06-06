@@ -45,7 +45,7 @@ function DescriptionCard(props) {
                       name="description"
                       isRequired
                       label=""
-                      defaultValue={description}
+                      defaultValue={description ? description : ""} 
                   >
                     {({ fieldProps }) => (
                         <Fragment>

@@ -21,17 +21,7 @@ export const cardSlice = createSlice({
         postNewCardFailure: (state, action) => {
             state.isLoading = false;
         },
-        getAllCard: (state, action) => {
-            state.isLoading = true;
-        },
-        getAllCardDone: (state, action) => {
-            console.log(action)
-            state.isLoading = false;
-            state.cards = action.payload
-        },
-        getAllCardFailure: (state, action) => {
-            state.isLoading = false;
-        },
+        
         updateCardTitle: (state, action) => {
             state.isLoading = true;
         },
@@ -119,21 +109,30 @@ export const cardSlice = createSlice({
             state.isLoading = true;
         },
         updateTaskStateDone: (state, action) => {
-            console.log(action.payload)
             state.card = action.payload
             state.isLoading = false;
         },
         updateTaskStateFailure: (state, action) => {
             state.isLoading = false;
         },
+        updateOrderNumCard: (state, action) => {
+            state.isLoading = true;
+        },
+        updateOrderNumCardDone: (state, action) => {
+            state.isLoading = false;
+            state.cards = action.payload
+        },
+        updateOrderNumCardFailure: (state, action) => {
+            state.isLoading = false;
+        },
 
     }
     
 })
-export const { postNewCard, postNewCardDone, postNewCardFailure, getAllCard, getAllCardDone, getAllCardFailure,
+export const { postNewCard, postNewCardDone, postNewCardFailure,
     updateCardTitle, updateCardTitleDone, updateCardTitleFailure, updateCardDescription, updateCardDescriptionDone, updateCardDescriptionFailure,
     updateCardCover, updateCardCoverDone, updateCardCoverFailure, updateCardDueDate, updateCardDueDateDone, updateCardDueDateFailure, updateCardColumnId,
     updateCardColumnIdDone, updateCardColumnIdFailure, postNewTasklist, postNewTasklistDone, postNewTasklistFailure,
-    postNewTask, postNewTaskDone, postNewTaskFailure, updateTaskName, updateTaskNameDone, updateTaskNameFailure, updateTaskState, updateTaskStateDone, updateTaskStateFailure
-    } = cardSlice.actions
+    postNewTask, postNewTaskDone, postNewTaskFailure, updateTaskName, updateTaskNameDone, updateTaskNameFailure, updateTaskState, updateTaskStateDone, updateTaskStateFailure,
+    updateOrderNumCard, updateOrderNumCardDone, updateOrderNumCardFailure} = cardSlice.actions
 export default cardSlice.reducer;

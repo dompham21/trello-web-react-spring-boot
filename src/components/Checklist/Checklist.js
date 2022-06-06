@@ -17,12 +17,16 @@ function Checklist(props) {
     const dispatch  = useDispatch();
 
     const calculatorPercentTaskDone = () => {
-        let total = tasklist?.tasks.length;
-        let totalDone = 0;
-        tasklist?.tasks.map(task =>  { if(task.state) totalDone++ });
-
-        if(totalDone === 0) return 0;
-        return ((totalDone/total)).toFixed(2);
+        if(tasklist?.tasks !== null) {
+            let total = tasklist.tasks.length;
+            let totalDone = 0;
+            tasklist?.tasks.map(task =>  { if(task.state) totalDone++ });
+    
+            if(totalDone === 0) return 0;
+            return ((totalDone/total)).toFixed(2);
+        }
+        else return 0;
+        
     }
     return (
         <div className='card-module'>

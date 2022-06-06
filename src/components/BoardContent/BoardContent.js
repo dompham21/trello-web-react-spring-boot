@@ -17,6 +17,7 @@ import LoadingButton from '@atlaskit/button/loading-button';
 import TextField from '@atlaskit/textfield';
 import {  getAllColumn, postNewColumn } from 'store/reducer/columnReducer';
 import {useParams} from "react-router-dom";
+import { updateOrderNumCard } from 'store/reducer/cardReducer';
 
 function BoardContent(props) {
   const { board } = props;
@@ -53,6 +54,7 @@ function BoardContent(props) {
   }
 
   const onDropColumn = (dropResult) => {
+    console.log(dropResult)
     let newColumns = applyDrag([...columns], dropResult);
     
     let newBoard = {...board}
@@ -63,14 +65,24 @@ function BoardContent(props) {
 
 
   const onCardDrop = (columnId, dropResult) => {
-    if(dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-      let newColumns  = [...columns]
+    const { removedIndex, addedIndex } = dropResult;
 
-      let currentColumn = newColumns.find(c => c.id === columnId);
-      console.log(dropResult)
+    if(removedIndex !== null && addedIndex !== null) {
+      console.log("index remove: " + removedIndex);
+      console.log("index add: " + addedIndex)
+      let currentColumn = columns.find(c => c.id === columnId);
+      console.log("remove: " + JSON.stringify(currentColumn.cards[removedIndex]))
+      console.log("add: " + JSON.stringify(currentColumn.cards[addedIndex]))
 
-      currentColumn.cards = applyDrag(currentColumn.cards, dropResult);
-      // setColumns(newColumns)
+      let dataToSubmit = {
+        "columnId": columnId,
+        "id1": currentColumn.cards[removedIndex].id,
+        "id2": currentColumn.cards[addedIndex].id,
+        "orderNum1": currentColumn.cards[removedIndex].orderNum,
+        "orderNum2": currentColumn.cards[addedIndex].orderNum
+      }
+
+      dispatch(updateOrderNumCard(dataToSubmit))
     }
   }
 
