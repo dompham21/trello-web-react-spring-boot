@@ -1,12 +1,15 @@
 import Joi from 'joi';
 import { getDB } from '../config/mongodb.js';
+import pkg from 'mongodb';
+// @ts-ignore
+const { ObjectId } = pkg;
 
 const boardCollectionName = 'boards'
 const boardCollectionSchema = Joi.object({
     title: Joi.string().required().min(3).max(50),
     columnOrder: Joi.array().items(Joi.string()).default([]),
-    createdAt: Joi.date(),
-    updatedAt: Joi.date().default(null),
+    createdAt: Joi.date().timestamp().default(Date.now()),
+    updatedAt: Joi.date().timestamp().default(null),
     _destroy: Joi.boolean().default(false)
 })
 
@@ -25,4 +28,17 @@ const createNew = async (data) => {
     }
 }
 
-export const BoardModel = { createNew }
+const update = async (id, data) => {
+    try {
+        const result = await getDB().collection(boardCollectionName).findOneAndUpdate(
+            { _id: ObjectId(id) },
+            { $set: data },
+            { returnOriginal: false}
+        );
+        return result.value
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+export const BoardModel = { createNew, update }

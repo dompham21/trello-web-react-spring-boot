@@ -18,16 +18,6 @@ const boostServer = () => {
     app.use(express.json())
     
     app.use('/api', api);
-
-    app.get('/test', async (req, res) => {
-        let mock = { 
-            title: "First board",
-
-        }
-
-        await BoardModel.createNew(mock);
-
-    })
     
     // @ts-ignore
     app.listen(env.PORT, env.HOSTNAME, () => {
