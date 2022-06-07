@@ -2,7 +2,7 @@ import express from 'express';
 import { env } from './config/environment.js';
 import { connectDB } from './config/mongodb.js';
 import { BoardModel } from './models/board.model.js';
-
+import { api } from './routes/index.js';
 
 connectDB()
 .then(() => console.log("Database connected successfully!"))
@@ -14,6 +14,10 @@ connectDB()
 
 const boostServer = () => {
     const app = express();
+    
+    app.use(express.json())
+    
+    app.use('/api', api);
 
     app.get('/test', async (req, res) => {
         let mock = { 

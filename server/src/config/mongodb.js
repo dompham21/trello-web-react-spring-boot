@@ -1,5 +1,7 @@
-import { MongoClient } from 'mongodb'
 import { env } from './environment.js';
+import pkg from 'mongodb';
+// @ts-ignore
+const { MongoClient } = pkg;
 
 let dbInstance = null;
 const uri = env.MONGODB_URI
