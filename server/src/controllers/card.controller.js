@@ -1,9 +1,9 @@
-import { BoardService } from "../services/board.service.js"
+import { CardService } from "../services/card.service.js"
 import { HttpStatusCode } from "../ultilities/constants.js"
 
 const createNew = async (req,res) => {
     try {
-        const result = await BoardService.createNew(req.body)
+        const result = await CardService.createNew(req.body)
 
         res.status(HttpStatusCode.OK).json(result)
     } catch (error) {
@@ -18,7 +18,7 @@ const update = async (req,res) => {
 
         const { id } = req.params;
 
-        const result = await BoardService.update(id, req.body)
+        const result = await CardService.update(id, req.body)
 
         res.status(HttpStatusCode.OK).json(result)
     } catch (error) {
@@ -28,4 +28,4 @@ const update = async (req,res) => {
     }
 }
 
-export const BoardController = { createNew, update }
+export const CardController = { createNew, update }

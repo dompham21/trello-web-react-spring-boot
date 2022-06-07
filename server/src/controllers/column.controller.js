@@ -1,9 +1,9 @@
-import { BoardService } from "../services/board.service.js"
+import { ColumnService } from "../services/column.service.js"
 import { HttpStatusCode } from "../ultilities/constants.js"
 
 const createNew = async (req,res) => {
     try {
-        const result = await BoardService.createNew(req.body)
+        const result = await ColumnService.createNew(req.body)
 
         res.status(HttpStatusCode.OK).json(result)
     } catch (error) {
@@ -18,7 +18,7 @@ const update = async (req,res) => {
 
         const { id } = req.params;
 
-        const result = await BoardService.update(id, req.body)
+        const result = await ColumnService.update(id, req.body)
 
         res.status(HttpStatusCode.OK).json(result)
     } catch (error) {
@@ -28,4 +28,4 @@ const update = async (req,res) => {
     }
 }
 
-export const BoardController = { createNew, update }
+export const ColumnController = { createNew, update }

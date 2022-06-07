@@ -1,8 +1,8 @@
-import { BoardModel } from "../models/board.model.js"
+import { ColumnModel } from "../models/column.model.js"
 
 const createNew = async (data) => {
     try {
-        const result = await BoardModel.createNew(data)
+        const result = await ColumnModel.createNew(data)
         return result
     } catch (error) {
         throw new Error(error)
@@ -16,11 +16,11 @@ const update = async (id, data) => {
             updatedDate: Date.now()
         }
 
-        const result = await BoardModel.update(id, updateData)
+        const result = await ColumnModel.update(id, updateData)
         return result
     } catch (error) {
         throw new Error(error)
     }
 }
 
-export const BoardService = { createNew, update }
+export const ColumnService = { createNew, update }
