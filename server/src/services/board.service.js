@@ -23,4 +23,19 @@ const update = async (id, data) => {
     }
 }
 
-export const BoardService = { createNew, update }
+const getBoards = async (id) => {
+    try {
+        const listBoards = await BoardModel.getBoards(id)
+        listBoards.columns.forEach(column => {
+            column.cards = listBoards.cards.filter(c => c.columnId.toString() === column._id.toString())
+        });
+
+        delete listBoards.cards
+        return listBoards
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+
+export const BoardService = { createNew, update, getBoards }

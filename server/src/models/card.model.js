@@ -7,6 +7,7 @@ const { ObjectId } = pkg;
 const cardCollectionName = 'cards'
 const cardCollectionSchema = Joi.object({
     columnId: Joi.string().required(),
+    boardId: Joi.string().required(),
     title: Joi.string().required().min(3).max(50),
     description: Joi.string().min(3).max(255),
     cover: Joi.string().default(null),
@@ -23,7 +24,14 @@ const validateSchema = async (data) => {
 const createNew = async (data) => {
     try {
         const value = await validateSchema(data);
-        const result = await getDB().collection(cardCollectionName).insertOne(value);
+
+        const insertValue = {
+            ...value,
+            boardId: ObjectId(value.boardId),
+            columnId: ObjectId(value.columnId)
+        }
+
+        const result = await getDB().collection(cardCollectionName).insertOne(insertValue);
         return result.ops[0]
     } catch (error) {
         throw new Error(error)
